@@ -30,6 +30,8 @@ def get_args():
         default="",
     )
 
+    parser.add_argument("--ee", action="store_true", help="convert text to lowercase")
+
     args = parser.parse_args()
 
     if os.path.isfile(args.text):
@@ -50,9 +52,16 @@ def main():
         out_fh = open(outfile, "wt")
     else:
         out_fh = sys.stdout
-    out_fh.write(text.upper() + "\n")
+
+    if args.ee:
+        out_fh.write(text.lower() + "\n")
+    else:
+        out_fh.write(text.upper() + "\n")
     out_fh.close()
 
+
+# TODO:
+# Alter the program to handle multiple input files. Change --outfile to --outdir, and write each input file to the same filename in the output directory.
 
 # --------------------------------------------------
 if __name__ == "__main__":
